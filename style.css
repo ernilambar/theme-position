@@ -897,6 +897,10 @@ object {
 	margin: 0 auto;
 }
 
+#masthead {
+	height: 80px;
+}
+
 .site-title {
 	font-size: 30px;
 	text-decoration: none;
@@ -907,8 +911,9 @@ object {
 
 .item-list {
 	list-style-type: none;
-	margin: 0;
+	margin: 10px 0;
 	padding: 0;
+
 }
 .item-list li span {
 	font-weight: bold;

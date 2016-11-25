@@ -13,29 +13,22 @@ get_header(); ?>
 		<main id="main" class="site-main" role="main">
 			<p><a href="https://themes.trac.wordpress.org/report/2" target="_blank">Theme Review Queue</a></p>
 
-			<?php $theme_slug = 'juno'; ?>
-			<h4>Result for: <em><?php echo $theme_slug; ?></em></h4>
+			<form action="<?php echo esc_url( home_url( '/' ) ); ?>" id="frm_position_finder" name="frm_position_finder" method="post">
+				<?php $txt_theme_name = ( isset( $_POST['txt_theme_name'] ) ) ? $_POST['txt_theme_name'] : ''; ?>
+				<label><input type="text" name="txt_theme_name" id="txt_theme_name" placeholder="Enter theme name or slug..." value="<?php echo esc_attr( $txt_theme_name ); ?>" /></label>
+				<button type"submit" name="btn_go">GO</button>
+			</form>
+
 			<?php
-				$all_themes = theme_position_get_all_themes();
-				$item = wp_list_filter( $all_themes, array( 'slug' => $theme_slug ) );
-				if ( ! empty( $item ) ) {
-					$keys = array_keys( $item );
-					$position = array_shift( $keys );
-					$theme = array_shift( $item );
-					echo '<ul class="item-list">';
-					echo '<li class="position"><span>Position:</span>' . $position . '</li>';
-					echo '<li><span>Theme Name:</span><a href="https://themes.trac.wordpress.org/ticket/' . $theme['id'] . '" target="_blank">' . $theme['name'] . '</a></li>';
-					echo '<li><span>Version:</span>' . $theme['version'] . '</li>';
-					echo '<li><span>Created:</span>' . $theme['time'] . '</li>';
-					echo '<li><span>Modified:</span>' . $theme['changetime'] . '</li>';
-					echo '<li><span>Reporter:</span><a href="https://themes.trac.wordpress.org/query?status=!closed&reporter=' . $theme['reporter'] . '" target="_blank">' . $theme['reporter'] . '</a></li>';
-
-					echo '</ul>';
+				if ( isset( $_POST['btn_go'] ) ) {
+					$theme_slug = theme_position_validate_input( $_POST );
+					if ( ! empty( $theme_slug ) ) {
+						theme_position_render_result( $theme_slug );
+					}
+					else {
+						echo '<p>Error!</p>';
+					}
 				}
-				else {
-					echo '<p><strong>Not found!</strong></p>';
-				}
-
 			?>
 
 		</main><!-- #main -->
