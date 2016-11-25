@@ -509,17 +509,10 @@ textarea {
 /*--------------------------------------------------------------
 ## Links
 --------------------------------------------------------------*/
-a {
-	color: royalblue;
-}
-
-a:visited {
-	color: purple;
-}
-
-a:hover,
+a,
 a:focus,
-a:active {
+a:visited,
+a:hover {
 	color: midnightblue;
 }
 
@@ -902,4 +895,26 @@ object {
 #page {
 	width: 800px;
 	margin: 0 auto;
+}
+
+.site-title {
+	font-size: 30px;
+	text-decoration: none;
+}
+.site-title a {
+	text-decoration: none;
+}
+
+.item-list {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+.item-list li span {
+	font-weight: bold;
+	margin-right: 10px;
+}
+.item-list li.position {
+	font-weight: bold;
+	font-size: 1.1em;
 }

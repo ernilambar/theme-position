@@ -140,3 +140,82 @@ require get_template_directory() . '/inc/customizer.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/jetpack.php';
+
+function theme_position_themelist( $dom ){
+	$domxpath = new DOMXPath($dom);
+	$themelist = array();
+	$count = 1;
+
+	$tr = $domxpath->query('//table[@class="listing tickets"]/tbody/tr');
+
+
+	foreach ($tr as $key) {
+		foreach ($key->childNodes as $k) {
+			if($k->nodeName === 'td') {
+				foreach($k->attributes as $v){
+
+					// Ticket ID
+					if($v->nodeValue === 'id') {
+						$themelist[$count]['id'] = trim(str_replace('#', '', $k->nodeValue));
+					}
+
+					// Theme Name
+					if($v->nodeValue === 'summary') {
+						$themerawn = str_replace('THEME: ', '', $k->nodeValue);
+						$themename = trim(substr($themerawn, 0, strpos($themerawn, " –")));
+						$themeslug = strtolower( $themename );
+			    		$themeslug = preg_replace( '/[^a-z0-9_\-]/', '-', $themeslug );
+						$themeslug = preg_replace( '/(--)/', '-', $themeslug );
+						$themevers = trim(substr( $themerawn, strpos( $themerawn, '–') + 3 ) );
+
+						$themelist[$count]['name'] 		= $themename;
+						$themelist[$count]['slug'] 		= $themeslug;
+						$themelist[$count]['version'] 	= $themevers;
+					}
+
+					// Theme Author
+					if($v->nodeValue === 'reporter') {
+						$themelist[$count]['reporter'] = trim($k->nodeValue);
+					}
+
+					// Modified
+					if($v->nodeValue === 'changetime') {
+						$themelist[$count]['changetime'] = trim($k->nodeValue);
+					}
+
+					// Created
+					if($v->nodeValue === 'time') {
+						$themelist[$count]['time'] = trim($k->nodeValue);
+					}
+
+				}
+			}
+		}
+		$count++;
+	}
+
+	return (array) $themelist;
+}
+
+function theme_position_get_all_themes() {
+
+	$transient_key = 'tp_all_themes';
+	$transient_period = 1 * HOUR_IN_SECONDS;
+
+	$output = get_transient( $transient_key );
+	if ( false === $output ) {
+
+	    $uri = 'https://themes.trac.wordpress.org/query?priority=new+theme&priority=previously+reviewed&owner=&status=new&status=reviewing&keywords=!~buddypress&max=1000&col=id&col=summary&col=status&col=time&col=changetime&col=reporter&report=2&order=time';
+	    $contents = wp_remote_fopen($uri);
+	    $dom = new DOMDocument();
+	    $dom->preserveWhiteSpace = false;
+	    $dom->loadHTML($contents);
+	    $themelist = theme_position_themelist( $dom );
+
+		$output = $themelist;
+		set_transient( $transient_key, $output, $transient_period );
+	}
+
+	return $output;
+
+}
