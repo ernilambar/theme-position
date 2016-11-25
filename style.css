@@ -896,3 +896,10 @@ object {
 .gallery-caption {
 	display: block;
 }
+
+/* Custom Styling */
+
+#page {
+	width: 800px;
+	margin: 0 auto;
+}
