@@ -205,12 +205,35 @@ function theme_position_get_all_themes() {
 	$output = get_transient( $transient_key );
 	if ( false === $output ) {
 
-	    $uri = 'https://themes.trac.wordpress.org/query?priority=new+theme&priority=previously+reviewed&owner=&status=new&status=reviewing&keywords=!~buddypress&max=1000&col=id&col=summary&col=status&col=time&col=changetime&col=reporter&report=2&order=time';
-	    $contents = wp_remote_fopen($uri);
-	    $dom = new DOMDocument();
-	    $dom->preserveWhiteSpace = false;
-	    $dom->loadHTML($contents);
-	    $themelist = theme_position_themelist( $dom );
+		$uri = 'https://themes.trac.wordpress.org/query?priority=new+theme&priority=previously+reviewed&owner=&status=new&status=reviewing&keywords=!~buddypress&max=1000&col=id&col=summary&col=status&col=time&col=changetime&col=reporter&report=2&order=time';
+		$contents = wp_remote_fopen($uri);
+		$dom = new DOMDocument();
+		$dom->preserveWhiteSpace = false;
+		$dom->loadHTML($contents);
+		$themelist = theme_position_themelist( $dom );
+
+		$output = $themelist;
+		set_transient( $transient_key, $output, $transient_period );
+	}
+
+	return $output;
+
+}
+
+function theme_position_get_all_open_tickets() {
+
+	$transient_key = 'tp_all_tickets';
+	$transient_period = 1 * HOUR_IN_SECONDS;
+
+	$output = get_transient( $transient_key );
+	if ( false === $output || 1 === 2 ) {
+
+		$uri = 'https://themes.trac.wordpress.org/query?status=approved&status=new&status=reopened&status=reviewing&col=id&col=summary&col=type&col=status&col=priority&col=time&col=reporter&col=changetime&order=priority&max=1000';
+		$contents = wp_remote_fopen($uri);
+		$dom = new DOMDocument();
+		$dom->preserveWhiteSpace = false;
+		$dom->loadHTML($contents);
+		$themelist = theme_position_themelist( $dom );
 
 		$output = $themelist;
 		set_transient( $transient_key, $output, $transient_period );
