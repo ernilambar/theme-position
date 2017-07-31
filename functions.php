@@ -270,19 +270,8 @@ function theme_position_render_result( $theme_slug ) {
 	}
 }
 
-function theme_position_validate_input( $post ) {
-	$output = '';
+function theme_position_validate_input( $theme ) {
 
-	if ( ! isset( $post['txt_theme_name'] ) ) {
-		return $output;
-	}
+	return sanitize_title_with_dashes( $theme );
 
-	$theme_name = str_replace( ' ', '-', $post['txt_theme_name'] );
-	$theme_name = sanitize_key( $theme_name );
-
-	if ( ! empty( $theme_name ) ) {
-		$output = $theme_name;
-	}
-
-	return $output;
 }

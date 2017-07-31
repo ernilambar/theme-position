@@ -13,15 +13,16 @@ get_header(); ?>
 		<main id="main" class="site-main" role="main">
 			<p><a href="https://themes.trac.wordpress.org/report/2" target="_blank">Theme Review Queue</a></p>
 
-			<form action="<?php echo esc_url( home_url( '/' ) ); ?>" id="frm_position_finder" name="frm_position_finder" method="post">
-				<?php $txt_theme_name = ( isset( $_POST['txt_theme_name'] ) ) ? $_POST['txt_theme_name'] : ''; ?>
-				<label><input type="text" name="txt_theme_name" id="txt_theme_name" placeholder="Enter theme name or slug..." value="<?php echo esc_attr( $txt_theme_name ); ?>" /></label>
-				<button type"submit" name="btn_go">GO</button>
+			<?php $theme = ( isset( $_GET['theme'] ) ) ? $_GET['theme'] : ''; ?>
+
+			<form action="<?php echo esc_url( home_url( '/' ) ); ?>" id="frm_position_finder" name="frm_position_finder" method="GET">
+				<label><input type="text" name="theme" id="theme" placeholder="Enter theme name or slug&hellip;" value="<?php echo esc_attr( $theme ); ?>" autofocus /></label>
+				<input type="submit" value="GO" />
 			</form>
 
 			<?php
-				if ( isset( $_POST['btn_go'] ) ) {
-					$theme_slug = theme_position_validate_input( $_POST );
+				if ( $theme ) {
+					$theme_slug = theme_position_validate_input( $theme );
 					if ( ! empty( $theme_slug ) ) {
 						theme_position_render_result( $theme_slug );
 					}
