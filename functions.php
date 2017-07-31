@@ -257,21 +257,15 @@ function theme_position_render_result( $theme_slug ) {
 		$theme = array_shift( $item );
 
 		echo '<ul class="item-list">';
-		echo '<li class="position"><span>Position:</span>' . $position . '</li>';
-		echo '<li><span>Theme Name:</span><a href="https://themes.trac.wordpress.org/ticket/' . $theme['id'] . '" target="_blank">' . $theme['name'] . '</a></li>';
-		echo '<li><span>Version:</span>' . $theme['version'] . '</li>';
-		echo '<li><span>Created:</span>' . $theme['time'] . '</li>';
-		echo '<li><span>Modified:</span>' . $theme['changetime'] . '</li>';
-		echo '<li><span>Reporter:</span><a href="https://themes.trac.wordpress.org/query?status=!closed&reporter=' . $theme['reporter'] . '" target="_blank">' . $theme['reporter'] . '</a></li>';
+		echo '<li class="position"><span>Position:</span>' . esc_html( $position ) . '</li>';
+		echo '<li><span>Theme Name:</span><a href="https://themes.trac.wordpress.org/ticket/' . esc_attr( $theme['id'] ) . '" target="_blank">' . esc_html( $theme['name'] ) . '</a></li>';
+		echo '<li><span>Version:</span>' . esc_html( $theme['version'] ) . '</li>';
+		echo '<li><span>Created:</span>' . esc_html( $theme['time'] ) . '</li>';
+		echo '<li><span>Modified:</span>' . esc_html( $theme['changetime'] ) . '</li>';
+		echo '<li><span>Reporter:</span><a href="https://themes.trac.wordpress.org/query?status=!closed&reporter=' . esc_attr( $theme['reporter'] ) . '" target="_blank">' . esc_html( $theme['reporter'] ) . '</a></li>';
 		echo '</ul>';
 	}
 	else {
 		echo '<p><strong>Not found!</strong></p>';
 	}
-}
-
-function theme_position_validate_input( $theme ) {
-
-	return sanitize_title_with_dashes( $theme );
-
 }

@@ -22,7 +22,7 @@ get_header(); ?>
 
 			<?php
 				if ( $theme ) {
-					$theme_slug = theme_position_validate_input( $theme );
+					$theme_slug = sanitize_title_with_dashes( $theme );
 					if ( ! empty( $theme_slug ) ) {
 						theme_position_render_result( $theme_slug );
 					}
