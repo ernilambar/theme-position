@@ -33,6 +33,20 @@
 			<?php endif; ?>
 		</div><!-- .site-branding -->
 
+		<?php if ( has_nav_menu( 'primary' ) ) : ?>
+
+			<nav id="site-navigation" class="main-navigation">
+				<?php
+					wp_nav_menu( array(
+						'theme_location' => 'primary',
+						'menu_id'        => 'primary-menu',
+						'depth'          => 1,
+					) );
+				?>
+			</nav><!-- #site-navigation -->
+
+		<?php endif; ?>
+
 	</header><!-- #masthead -->
 
 	<div id="content" class="site-content">

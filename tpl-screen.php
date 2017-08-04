@@ -18,7 +18,7 @@ get_header(); ?>
 			<div id="main-screen">
 				<div class="container">
 
-					<h3>Review queue with screenshot of themes</h3>
+					<p>This is the list of themes in the Review queue. It takes a while to load all screenshots. Please be patient.</p>
 
 					<?php if ( ! empty( $all_themes ) ) : ?>
 

@@ -266,7 +266,7 @@ input,
 select,
 textarea {
 	color: #404040;
-	font-family: sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
 	font-size: 1rem;
 	line-height: 1.5;
@@ -545,6 +545,7 @@ a:active {
 .main-navigation li {
 	float: left;
 	position: relative;
+	margin-right: 10px;
 }
 
 .main-navigation a {
@@ -893,27 +894,31 @@ object {
 /* Custom Styling */
 
 #page {
-	width: 800px;
+	width: 1255px;
 	margin: 0 auto;
 }
 
 #masthead {
-	height: 80px;
+	overflow: hidden;
+	margin-bottom: 15px;
 }
 
 .site-title {
 	font-size: 30px;
 	text-decoration: none;
 }
+
 .site-title a {
 	text-decoration: none;
 }
 
 .item-list {
 	list-style-type: none;
-	margin: 10px 0;
+	margin: 10px auto;
 	padding: 0;
-
+}
+.item-list li {
+	text-align: left;
 }
 .item-list li span {
 	font-weight: bold;
@@ -924,10 +929,6 @@ object {
 	font-size: 1.1em;
 }
 
-.page-template-tpl-screen #page {
-	margin: 0 auto;
-	width: 1200px;
-}
 .page-template-tpl-screen #main-screen ul {
 	margin: 0;
 	padding: 0;
@@ -938,3 +939,5 @@ object {
 	margin-right: 5px;
 	margin-bottom: 5px;
 }
+
+

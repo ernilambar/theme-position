@@ -102,6 +102,13 @@ add_action( 'widgets_init', 'theme_position_widgets_init' );
  * Enqueue scripts and styles.
  */
 function theme_position_scripts() {
+
+	$fonts_url = theme_position_fonts_url();
+
+	if ( ! empty( $fonts_url ) ) {
+		wp_enqueue_style( 'theme-position-fonts', $fonts_url, array(), null );
+	}
+
 	wp_enqueue_style( 'theme-position-style', get_stylesheet_uri() );
 
 	wp_enqueue_script( 'theme-position-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
@@ -273,3 +280,35 @@ function theme_position_render_result( $theme_slug ) {
 		echo '<p><strong>Not found!</strong></p>';
 	}
 }
+
+if ( ! function_exists( 'theme_position_fonts_url' ) ) :
+
+	/**
+	 * Return fonts URL.
+	 *
+	 * @since 1.0.0
+	 * @return string Font URL.
+	 */
+	function theme_position_fonts_url() {
+
+		$fonts_url = '';
+		$fonts     = array();
+		$subsets   = 'latin,latin-ext';
+
+		/* translators: If there are characters in your language that are not supported by Roboto, translate this to 'off'. Do not translate into your own language. */
+		if ( 'off' !== _x( 'on', 'Roboto font: on or off', 'theme-position' ) ) {
+			$fonts[] = 'Roboto:400,700,900,400italic,700italic,900italic';
+		}
+
+		if ( $fonts ) {
+			$fonts_url = add_query_arg( array(
+				'family' => urlencode( implode( '|', $fonts ) ),
+				'subset' => urlencode( $subsets ),
+			), 'https://fonts.googleapis.com/css' );
+		}
+
+		return $fonts_url;
+
+	}
+
+endif;
