@@ -17,7 +17,10 @@ get_header(); ?>
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
-			<?php $all_themes = theme_position_get_all_themes(); ?>
+			<?php
+			$all_themes = theme_position_get_all_themes();
+			$all_themes = array_reverse( $all_themes );
+			?>
 
 			<div id="main-screen">
 				<div class="container">
