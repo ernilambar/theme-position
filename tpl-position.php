@@ -1,8 +1,6 @@
 <?php
 /**
- * Front page template file.
- *
- * @link https://codex.wordpress.org/Template_Hierarchy
+ * Template Name: Position
  *
  * @package Theme_Position
  */
@@ -36,4 +34,5 @@ get_header(); ?>
 	</div><!-- #primary -->
 
 <?php
+get_sidebar();
 get_footer();
