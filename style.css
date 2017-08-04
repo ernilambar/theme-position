@@ -935,4 +935,6 @@ object {
 .page-template-tpl-screen #main-screen ul li {
 	width: 280px;
 	display: inline-block;
+	margin-right: 5px;
+	margin-bottom: 5px;
 }

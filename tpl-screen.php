@@ -34,7 +34,7 @@ get_header(); ?>
 								 ?>
 								<li>
 									<a href="<?php echo esc_url( 'https://themes.trac.wordpress.org/ticket/' . $theme['id'] ); ?>" target="_blank" title="<?php echo esc_attr( $theme['name'] ); ?>">
-									<img class="lazy" src="<?php echo get_template_directory_uri() . '/images/no-image.png'; ?>" alt="<?php echo esc_attr( $theme['name'] ); ?>" data-src="<?php echo esc_url( $screenshot_url ); ?>" />
+									<img class="lazy" src="<?php echo get_template_directory_uri() . '/images/ajax-loader.gif'; ?>" alt="<?php echo esc_attr( $theme['name'] ); ?>" data-src="<?php echo esc_url( $screenshot_url ); ?>" />
 									</a>
 								</li>
 							<?php endforeach; ?>
