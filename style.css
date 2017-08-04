@@ -923,3 +923,16 @@ object {
 	font-weight: bold;
 	font-size: 1.1em;
 }
+
+.page-template-tpl-screen #page {
+	margin: 0 auto;
+	width: 1200px;
+}
+.page-template-tpl-screen #main-screen ul {
+	margin: 0;
+	padding: 0;
+}
+.page-template-tpl-screen #main-screen ul li {
+	width: 280px;
+	display: inline-block;
+}
