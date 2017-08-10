@@ -9,6 +9,7 @@ get_header(); ?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
+			<p>Enter theme name or slug to find out your theme position in <a href="https://themes.trac.wordpress.org/report/2" target="_blank">Theme Review Queue</a>.</p>
 			<div class="position-main">
 
 				<?php $theme = ( isset( $_GET['theme'] ) ) ? $_GET['theme'] : ''; ?>

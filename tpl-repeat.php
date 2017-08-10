@@ -10,6 +10,8 @@ get_header(); ?>
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
+			<p>This is the list of theme authors who have multiple open tickets in the <a href="https://themes.trac.wordpress.org/report/2" target="_blank">Theme Review Queue</a>.</p>
+
 			<?php
 			$all_tickets = theme_position_get_all_open_tickets();
 			?>
